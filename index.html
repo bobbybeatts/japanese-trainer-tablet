@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#173f35">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="가나노트">
+  <meta name="description" content="태블릿에서 단어를 익히고 히라가나와 가타카나를 따라 쓰는 오프라인 일본어 학습 앱">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>가나노트 · 일본어 트레이너</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">あ</div>
+      <div class="brand-copy">
+        <strong>가나노트</strong>
+        <span>나만의 일본어 연습장</span>
+      </div>
+      <button id="installButton" class="ghost-button install-button" type="button" hidden>앱으로 설치</button>
+      <span id="offlineBadge" class="status-badge">오프라인 저장</span>
+    </header>
+
+    <main>
+      <section id="studyView" class="view active" data-view="study">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">오늘의 학습</p>
+            <h1>한 장씩, 천천히.</h1>
+          </div>
+          <div class="daily-stat"><strong id="todayCorrect">0</strong><span id="todayTotal">/ 0 정답</span></div>
+        </div>
+
+        <div class="control-strip">
+          <label>문자
+            <select id="studyCategory">
+              <option>전체</option><option>히라가나</option><option>가타카나</option><option>혼합</option>
+            </select>
+          </label>
+          <label>방식
+            <select id="studyKind">
+              <option value="reading">읽기 퀴즈</option>
+              <option value="meaning">뜻 퀴즈</option>
+              <option value="card">암기 카드</option>
+              <option value="mistakes">오답 복습</option>
+            </select>
+          </label>
+        </div>
+
+        <article class="quiz-card">
+          <div class="card-meta"><span id="quizCategory">히라가나</span><span id="queueCount">대기 0</span></div>
+          <div id="quizWord" class="quiz-word">あさ</div>
+          <p id="quizPrompt" class="quiz-prompt">한글 발음을 입력하세요</p>
+          <input id="quizAnswer" class="answer-input" autocomplete="off" inputmode="text" placeholder="여기에 입력">
+          <div id="quizFeedback" class="feedback" aria-live="polite"></div>
+          <div class="action-row">
+            <button id="checkAnswer" class="primary-button" type="button">정답 확인</button>
+            <button id="skipWord" class="secondary-button" type="button">모르겠어요</button>
+            <button id="nextWord" class="secondary-button" type="button">다음 →</button>
+          </div>
+        </article>
+      </section>
+
+      <section id="chartView" class="view" data-view="chart">
+        <div class="section-heading compact">
+          <div><p class="eyebrow">기본 46자</p><h1>가나 한눈표</h1></div>
+        </div>
+        <div class="segmented" role="group" aria-label="가나표 문자 선택">
+          <button class="active" data-chart="hiragana" type="button">히라가나</button>
+          <button data-chart="katakana" type="button">가타카나</button>
+        </div>
+        <div id="kanaChart" class="kana-chart" aria-label="가나 문자표"></div>
+        <p class="helper-text">한국어 음은 처음 익힐 때 참고하는 근사 표기입니다.</p>
+      </section>
+
+      <section id="writingView" class="view" data-view="writing">
+        <div class="writing-header">
+          <div><p class="eyebrow">Apple Pencil · S Pen · 터치</p><h1>손으로 기억하기</h1></div>
+          <div class="writing-prompt"><strong id="writingChar">あ</strong><span id="writingSound">아</span></div>
+        </div>
+        <div class="control-strip writing-controls">
+          <label>출제 범위
+            <select id="writingMode"><option>히라가나</option><option>가타카나</option><option>혼합</option></select>
+          </label>
+          <label class="range-label">펜 굵기<input id="penWidth" type="range" min="2" max="20" value="7"></label>
+          <label class="check-label"><input id="showGuide" type="checkbox" checked> 옅은 가이드</label>
+        </div>
+        <div class="canvas-wrap"><canvas id="writingCanvas"></canvas></div>
+        <div class="action-row writing-actions">
+          <button id="clearCanvas" class="secondary-button" type="button">모두 지우기</button>
+          <button id="undoStroke" class="secondary-button" type="button">한 획 되돌리기</button>
+          <button id="nextKana" class="primary-button" type="button">다음 문자 →</button>
+        </div>
+      </section>
+
+      <section id="wordsView" class="view" data-view="words">
+        <div class="section-heading compact">
+          <div><p class="eyebrow">내 학습장</p><h1>단어와 데이터</h1></div>
+          <div class="word-total"><strong id="wordTotal">0</strong><span>개 단어</span></div>
+        </div>
+
+        <form id="addWordForm" class="panel add-form">
+          <h2>새 단어 추가</h2>
+          <div class="form-grid">
+            <label>일본어 표기<input id="newExpression" required placeholder="예: おはよう"></label>
+            <label>가나 읽기<input id="newReading" required placeholder="예: おはよう"></label>
+            <label>한국어 뜻<input id="newMeaning" required placeholder="예: 좋은 아침"></label>
+            <button class="primary-button" type="submit">단어 저장</button>
+          </div>
+          <p id="addWordMessage" class="form-message" aria-live="polite"></p>
+        </form>
+
+        <div class="panel data-panel">
+          <div><h2>백업 및 복원</h2><p>단어와 학습 기록을 한 파일에 보관합니다.</p></div>
+          <div class="data-actions">
+            <button id="exportData" class="secondary-button" type="button">백업 내보내기</button>
+            <label class="secondary-button file-button">백업 가져오기<input id="importData" type="file" accept="application/json,.json"></label>
+          </div>
+        </div>
+
+        <div class="word-list-heading"><h2>저장된 단어</h2><input id="wordSearch" type="search" placeholder="단어 검색"></div>
+        <div id="wordList" class="word-list"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="주요 메뉴">
+      <button class="active" data-target="study" type="button"><span>問</span>학습</button>
+      <button data-target="chart" type="button"><span>表</span>가나표</button>
+      <button data-target="writing" type="button"><span>書</span>따라쓰기</button>
+      <button data-target="words" type="button"><span>単</span>내 단어</button>
+    </nav>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
+

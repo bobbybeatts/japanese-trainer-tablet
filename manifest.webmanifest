@@ -1,0 +1,16 @@
+{
+  "name": "가나노트 · 일본어 트레이너",
+  "short_name": "가나노트",
+  "description": "단어를 익히고 히라가나와 가타카나를 직접 따라 쓰는 오프라인 일본어 학습 앱",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f7f3ea",
+  "theme_color": "#173f35",
+  "icons": [
+    {"src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
+
