@@ -1,4 +1,4 @@
-const CACHE = 'kananote-v5';
+const CACHE = 'kananote-v6';
 const ASSETS = [
   './', './index.html', './styles.css', './base.css', './study.css', './chart.css',
   './writing.css', './words.css', './navigation.css', './responsive.css',

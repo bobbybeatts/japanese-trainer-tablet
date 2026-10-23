@@ -12,12 +12,14 @@
 .word-list-heading { display: flex; align-items: center; justify-content: space-between; margin: 28px 0 12px; }
 .word-list-heading input { width: min(260px,48%); }
 .word-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
-.word-item { display: flex; align-items: center; gap: 14px; padding: 15px 16px; border: 1px solid var(--line); border-radius: 17px; background: rgba(255,255,255,.66); }
-.word-item .jp { min-width: 92px; font-size: 21px; font-weight: 800; }
-.word-item .details { min-width: 0; flex: 1; }
-.word-item .reading { color: var(--muted); font-size: 12px; }
-.word-item .pronunciation { color: var(--green); font-size: 12px; }
-.word-item .meaning { overflow: hidden; margin-top: 2px; text-overflow: ellipsis; white-space: nowrap; }
+.word-item { display: grid; grid-template-columns: minmax(0,1fr) auto auto; align-items: center; gap: 6px 10px; padding: 15px 16px; border: 1px solid var(--line); border-radius: 17px; background: rgba(255,255,255,.66); }
+.word-item .jp { grid-column: 1; grid-row: 1; min-width: 0; overflow-wrap: anywhere; font-size: 21px; font-weight: 800; }
+.word-item .details { grid-column: 1; grid-row: 2; min-width: 0; }
+.word-item .reading { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.word-item .pronunciation { color: var(--green); font-size: 12px; overflow-wrap: anywhere; }
+.word-item .meaning { margin-top: 2px; overflow-wrap: anywhere; }
+.word-item .edit-pronunciation { grid-column: 2; grid-row: 1 / span 2; }
+.word-item .delete-word { grid-column: 3; grid-row: 1 / span 2; }
 .edit-pronunciation { min-height: 36px; padding: 0 8px; border: 1px solid var(--line); border-radius: 10px; color: var(--green); background: white; font-size: 12px; font-weight: 700; }
 .delete-word { width: 36px; height: 36px; border: 0; border-radius: 50%; color: #a84431; background: #f8e8e4; font-size: 18px; }
 .empty-state { grid-column: 1/-1; padding: 36px; color: var(--muted); text-align: center; }
