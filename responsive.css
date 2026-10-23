@@ -1,0 +1,24 @@
+@media (max-width: 700px) {
+  .app-shell { padding-left: 16px; padding-right: 16px; }
+  .topbar { height: 76px; }
+  .status-badge { display: none; }
+  main { padding-top: 24px; }
+  .section-heading { align-items: center; }
+  .quiz-card { min-height: 410px; padding: 18px; }
+  .quiz-word { margin-top: 46px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .data-panel { align-items: stretch; flex-direction: column; }
+  .data-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .word-list { grid-template-columns: 1fr; }
+  .writing-header { align-items: flex-start; }
+  .writing-prompt strong { font-size: 40px; }
+  .check-label { margin-left: 0; }
+}
+
+@media (max-width: 470px) {
+  .action-row { flex-wrap: wrap; }
+  .action-row button { min-width: 42%; }
+  .kana-cell { min-height: 56px; }
+  .writing-header { flex-direction: column; }
+  .writing-prompt { width: 100%; justify-content: center; }
+}

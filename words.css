@@ -1,0 +1,23 @@
+.panel { padding: 20px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); }
+.add-form { margin-bottom: 14px; }
+.form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-top: 15px; align-items: end; }
+.form-grid label { display: flex; flex-direction: column; gap: 7px; }
+.form-grid button { grid-column: 1/-1; }
+.form-message { min-height: 18px; margin: 8px 0 0; color: var(--green); font-size: 12px; }
+.data-panel { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.data-panel p { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+.data-actions { display: flex; gap: 8px; }
+.file-button { display: grid; place-items: center; }
+.file-button input { display: none; }
+.word-list-heading { display: flex; align-items: center; justify-content: space-between; margin: 28px 0 12px; }
+.word-list-heading input { width: min(260px,48%); }
+.word-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.word-item { display: flex; align-items: center; gap: 14px; padding: 15px 16px; border: 1px solid var(--line); border-radius: 17px; background: rgba(255,255,255,.66); }
+.word-item .jp { min-width: 92px; font-size: 21px; font-weight: 800; }
+.word-item .details { min-width: 0; flex: 1; }
+.word-item .reading { color: var(--muted); font-size: 12px; }
+.word-item .pronunciation { color: var(--green); font-size: 12px; }
+.word-item .meaning { overflow: hidden; margin-top: 2px; text-overflow: ellipsis; white-space: nowrap; }
+.edit-pronunciation { min-height: 36px; padding: 0 8px; border: 1px solid var(--line); border-radius: 10px; color: var(--green); background: white; font-size: 12px; font-weight: 700; }
+.delete-word { width: 36px; height: 36px; border: 0; border-radius: 50%; color: #a84431; background: #f8e8e4; font-size: 18px; }
+.empty-state { grid-column: 1/-1; padding: 36px; color: var(--muted); text-align: center; }

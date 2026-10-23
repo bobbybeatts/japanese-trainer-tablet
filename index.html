@@ -47,9 +47,11 @@
               <option value="meaning">뜻 퀴즈</option>
               <option value="card">암기 카드</option>
               <option value="mistakes">오답 복습</option>
+              <option value="review">오늘의 복습</option>
             </select>
           </label>
         </div>
+        <p id="reviewSummary" class="review-summary" aria-live="polite"></p>
 
         <article class="quiz-card">
           <div class="card-meta"><span id="quizCategory">히라가나</span><span id="queueCount">대기 0</span></div>
@@ -108,6 +110,7 @@
           <div class="form-grid">
             <label>일본어 표기<input id="newExpression" required placeholder="예: おはよう"></label>
             <label>가나 읽기<input id="newReading" required placeholder="예: おはよう"></label>
+            <label>한국 발음<input id="newPronunciation" placeholder="읽기를 입력하면 자동 생성"></label>
             <label>한국어 뜻<input id="newMeaning" required placeholder="예: 좋은 아침"></label>
             <button class="primary-button" type="submit">단어 저장</button>
           </div>
@@ -135,7 +138,7 @@
     </nav>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js" defer></script>
+  <script src="app.js" type="module"></script>
 </body>
 </html>
 

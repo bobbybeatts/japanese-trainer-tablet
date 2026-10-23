@@ -1,5 +1,11 @@
-const CACHE = 'kananote-v1';
-const ASSETS = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './icons/icon.svg'];
+const CACHE = 'kananote-v5';
+const ASSETS = [
+  './', './index.html', './styles.css', './base.css', './study.css', './chart.css',
+  './writing.css', './words.css', './navigation.css', './responsive.css',
+  './manifest.webmanifest', './icons/icon.svg',
+  './app.js', './ui.js', './state.js', './storage.js', './seed.js', './seed_words.json', './kana.js',
+  './review.js', './study.js', './chart.js', './writing.js', './words.js', './backup.js'
+];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
