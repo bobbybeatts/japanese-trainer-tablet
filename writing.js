@@ -1,4 +1,4 @@
-import { KANA_ROWS, toKatakana, koreanReading } from './kana.js';
+import { KANA_ROWS, toKatakana, koreanReading } from './kana.js?v=14';
 import { $ } from './ui.js';
 
 function createWritingSurface({ canvas, charElement, soundElement, shouldShowGuide, strokeWidth }) {
