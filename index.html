@@ -10,7 +10,13 @@
   <meta name="description" content="태블릿에서 단어를 익히고 히라가나와 가타카나를 따라 쓰는 오프라인 일본어 학습 앱">
   <link rel="manifest" href="manifest.webmanifest?v=10">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=12">
+  <link rel="stylesheet" href="styles.css?v=13">
+  <script>
+    const isAndroidBrowser = /Android/i.test(navigator.userAgent) && !window.KanaNoteAndroid;
+    document.documentElement.classList.toggle('android-browser', isAndroidBrowser);
+    document.documentElement.classList.toggle('native-app', Boolean(window.KanaNoteAndroid));
+    document.documentElement.classList.toggle('other-browser', !isAndroidBrowser && !window.KanaNoteAndroid);
+  </script>
   <title>가나노트 · 일본어 트레이너</title>
 </head>
 <body>
@@ -171,7 +177,7 @@
     </div>
   </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=16" type="module"></script>
+  <script src="app.js?v=17" type="module"></script>
 </body>
 </html>
 

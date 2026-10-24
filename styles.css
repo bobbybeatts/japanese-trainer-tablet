@@ -5,3 +5,11 @@
 @import url('./words.css?v=7');
 @import url('./navigation.css');
 @import url('./responsive.css?v=2');
+
+.android-browser .apk-button,
+.android-browser #installButton,
+.native-app .apk-button,
+.native-app .apk-promo,
+.native-app #installButton,
+.other-browser .apk-button,
+.other-browser .apk-promo { display: none !important; }
