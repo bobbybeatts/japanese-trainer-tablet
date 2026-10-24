@@ -158,13 +158,20 @@
     </div>
     <div class="kana-dialog-body">
       <section class="kana-dialog-practice" aria-label="따라쓰기 영역">
-        <div class="kana-dialog-actions"><button id="clearKanaDialog" class="secondary-button" type="button">모두 지우기</button><button id="undoKanaDialog" class="secondary-button" type="button">한 획 되돌리기</button></div>
+        <div class="kana-dialog-actions">
+          <button id="clearKanaDialog" class="secondary-button" type="button">모두 지우기</button>
+          <button id="undoKanaDialog" class="secondary-button" type="button">한 획 되돌리기</button>
+        </div>
         <div class="kana-dialog-canvas"><canvas id="kanaDialogCanvas"></canvas></div>
       </section>
-      <section class="kana-dialog-words" aria-labelledby="kanaDialogWordsHeading"><h3 id="kanaDialogWordsHeading">이 글자가 들어간 단어</h3><ul id="kanaWordExamples" class="kana-word-examples"></ul></section>
+      <section class="kana-dialog-words" aria-labelledby="kanaDialogWordsHeading">
+        <h3 id="kanaDialogWordsHeading">이 글자가 들어간 단어</h3>
+        <ul id="kanaWordExamples" class="kana-word-examples"></ul>
+      </section>
     </div>
   </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=14" type="module"></script>
+  <script src="app.js?v=15" type="module"></script>
 </body>
 </html>
+

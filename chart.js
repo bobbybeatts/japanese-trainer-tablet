@@ -1,6 +1,6 @@
-import { KANA_SETS, toKatakana, toHiragana, koreanReading, wordPronunciation } from './kana.js?v=14';
+import { KANA_SETS, toKatakana, toHiragana, koreanReading, wordPronunciation } from './kana.js?v=15';
 import { state } from './state.js';
-import { createWritingSurface } from './writing.js?v=14';
+import { createWritingSurface } from './writing.js?v=15';
 import { $, $$ } from './ui.js';
 
 let chartMode = 'hiragana';
@@ -31,22 +31,54 @@ function renderKanaChart() {
 function renderWordExamples(char) {
   const target = $('#kanaWordExamples');
   const normalized = toHiragana(char);
-  const words = state.words.filter(word => {
-    const reading = toHiragana(word.reading || '');
-    const expression = toHiragana(word.expression || '');
-    return reading.includes(normalized) || expression.includes(normalized);
-  }).slice(0, 8);
-  target.innerHTML = words.length ? words.map(word => `<li class="kana-word-example"><strong>${escapeHtml(word.expression)}</strong><span class="kana-word-reading">${escapeHtml(word.reading)} · ${escapeHtml(wordPronunciation(word))}</span><span class="kana-word-meaning">${escapeHtml(word.meaning)}</span></li>`).join('')
-    : '<li class="kana-word-empty">아직 이 글자가 포함된 단어가 없습니다.</li>';
+  const source = state.words;
+  const matches = [];
+  let cursor = 0;
+  target.innerHTML = '<li class="kana-word-empty">단어를 불러오는 중…</li>';
+  const scheduleScan = callback => {
+    if (typeof requestIdleCallback === 'function') requestIdleCallback(callback, { timeout: 120 });
+    else if (typeof window !== 'undefined') setTimeout(() => callback(null), 0);
+    else callback(null);
+  };
+
+  const scan = deadline => {
+    const started = performance.now();
+    while (cursor < source.length && matches.length < 6 && (deadline && !deadline.didTimeout ? deadline.timeRemaining() > 2 : performance.now() - started < 7)) {
+      const word = source[cursor++];
+      const reading = toHiragana(word.reading || '');
+      const expression = toHiragana(word.expression || '');
+      if (reading.includes(normalized) || expression.includes(normalized)) matches.push(word);
+    }
+    if (cursor < source.length && matches.length < 6) {
+      scheduleScan(scan);
+      return;
+    }
+
+    target.innerHTML = matches.length ? matches.map(word => `
+    <li class="kana-word-example">
+      <strong>${escapeHtml(word.expression)}</strong>
+      <span class="kana-word-reading">${escapeHtml(word.reading)} · ${escapeHtml(wordPronunciation(word))}</span>
+      <span class="kana-word-meaning">${escapeHtml(word.meaning)}</span>
+    </li>`).join('') : '<li class="kana-word-empty">아직 이 글자가 포함된 단어가 없습니다.</li>';
+  };
+
+  scheduleScan(scan);
 }
 
 function openKanaDialog(char) {
-  modalWriting.setCharacter(char);
-  renderWordExamples(char);
+  $('#kanaDialogCharacter').textContent = char;
+  $('#kanaDialogSound').textContent = koreanReading(char);
   const dialog = $('#kanaDialog');
+  document.documentElement?.classList.add('kana-modal-open');
   if (typeof dialog.showModal === 'function') dialog.showModal();
   else dialog.setAttribute('open', '');
-  queueMicrotask(() => modalWriting.resize());
+  const afterPaint = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : callback => callback();
+  afterPaint(() => {
+    if (!dialog.open) return;
+    modalWriting.setCharacter(char);
+    modalWriting.resize();
+    renderWordExamples(char);
+  });
 }
 
 export function initChart() {
@@ -65,14 +97,17 @@ export function initChart() {
     if (button) openKanaDialog(button.dataset.kana);
   });
 
+  const modalCanvas = $('#kanaDialogCanvas');
   modalWriting = createWritingSurface({
-    canvas: $('#kanaDialogCanvas'),
+    canvas: modalCanvas,
     charElement: $('#kanaDialogCharacter'),
     soundElement: $('#kanaDialogSound'),
     shouldShowGuide: () => true,
     strokeWidth: () => 7
   });
-  $('#closeKanaDialog').addEventListener('click', () => $('#kanaDialog').close());
+  const dialog = $('#kanaDialog');
+  dialog.addEventListener('close', () => document.documentElement?.classList.remove('kana-modal-open'));
+  $('#closeKanaDialog').addEventListener('click', () => dialog.close());
   $('#clearKanaDialog').addEventListener('click', () => modalWriting.clear());
   $('#undoKanaDialog').addEventListener('click', () => modalWriting.undo());
   renderKanaChart();

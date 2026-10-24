@@ -44,7 +44,8 @@ select:focus, input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rg
 .kana-cell.empty { color: #c8c1b5; }
 .helper-text { color: var(--muted); font-size: 12px; }
 
-.kana-dialog { width: min(900px, calc(100vw - 28px)); max-width: 900px; max-height: min(88dvh, 820px); margin: auto; padding: 0; overflow: auto; border: 0; border-radius: 24px; color: var(--ink); background: var(--paper); box-shadow: var(--shadow); }
+.kana-modal-open, .kana-modal-open body { overflow: hidden; overscroll-behavior: none; }
+.kana-dialog { width: min(900px, calc(100vw - 28px)); max-width: 900px; max-height: min(88dvh, 820px); margin: auto; padding: 0; overflow: auto; overscroll-behavior: contain; border: 0; border-radius: 24px; color: var(--ink); background: var(--paper); box-shadow: var(--shadow); }
 .kana-dialog::backdrop { background: rgba(13,27,23,.58); backdrop-filter: blur(3px); }
 .kana-dialog-header { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; border-bottom: 1px solid var(--line); background: var(--paper); }
 .kana-dialog-header .eyebrow { margin-bottom: 2px; }

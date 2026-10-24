@@ -1,11 +1,11 @@
-const CACHE = 'kananote-v15';
+const CACHE = 'kananote-v16';
 const ASSETS = [
   './', './index.html', './styles.css', './styles.css?v=10', './base.css', './base.css?v=2', './study.css', './chart.css',
-  './writing.css', './writing.css?v=2', './words.css', './words.css?v=7', './navigation.css', './responsive.css', './responsive.css?v=2',
+  './writing.css', './writing.css?v=3', './words.css', './words.css?v=7', './navigation.css', './responsive.css', './responsive.css?v=2',
   './manifest.webmanifest', './manifest.webmanifest?v=10',
   './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png',
-  './app.js', './app.js?v=14', './ui.js', './state.js', './storage.js', './seed.js', './seed_words.json', './kana.js', './kana.js?v=14',
-  './review.js', './study.js', './chart.js', './chart.js?v=14', './writing.js', './writing.js?v=14', './words.js', './backup.js'
+  './app.js', './app.js?v=15', './ui.js', './state.js', './storage.js', './seed.js', './seed_words.json', './kana.js', './kana.js?v=15',
+  './review.js', './study.js', './chart.js', './chart.js?v=15', './writing.js', './writing.js?v=15', './words.js', './backup.js'
 ];
 
 self.addEventListener('install', event => {
@@ -24,3 +24,4 @@ self.addEventListener('fetch', event => {
     return response;
   }).catch(() => caches.match('./index.html'))));
 });
+
