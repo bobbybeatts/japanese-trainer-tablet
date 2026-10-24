@@ -6,7 +6,22 @@ const KANA_ROWS = [
   ['라행', ['ら','り','る','れ','ろ']], ['와행', ['わ',null,null,null,'を']],
   ['발음', ['ん',null,null,null,null]]
 ];
-
+const KANA_SETS = {
+  basic: { label: '기본 46자', rows: KANA_ROWS },
+  dakuten: { label: '탁음', rows: [
+    ['가행', ['が','ぎ','ぐ','げ','ご']], ['자행', ['ざ','じ','ず','ぜ','ぞ']],
+    ['다행', ['だ','ぢ','づ','で','ど']], ['바행', ['ば','び','ぶ','べ','ぼ']]
+  ] },
+  handakuten: { label: '반탁음', rows: [['파행', ['ぱ','ぴ','ぷ','ぺ','ぽ']]] },
+  yoon: { label: '요음', rows: [
+    ['き', ['きゃ',null,'きゅ',null,'きょ']], ['し', ['しゃ',null,'しゅ',null,'しょ']],
+    ['ち', ['ちゃ',null,'ちゅ',null,'ちょ']], ['に', ['にゃ',null,'にゅ',null,'にょ']],
+    ['ひ', ['ひゃ',null,'ひゅ',null,'ひょ']], ['み', ['みゃ',null,'みゅ',null,'みょ']],
+    ['り', ['りゃ',null,'りゅ',null,'りょ']], ['ぎ', ['ぎゃ',null,'ぎゅ',null,'ぎょ']],
+    ['じ', ['じゃ',null,'じゅ',null,'じょ']], ['び', ['びゃ',null,'びゅ',null,'びょ']],
+    ['ぴ', ['ぴゃ',null,'ぴゅ',null,'ぴょ']]
+  ] }
+};
 const SOUND = {
   'あ':'아','い':'이','う':'우','え':'에','お':'오','か':'카','き':'키','く':'쿠','け':'케','こ':'코',
   'さ':'사','し':'시','す':'스','せ':'세','そ':'소','た':'타','ち':'치','つ':'츠','て':'테','と':'토',
@@ -22,15 +37,12 @@ const SOUND = {
   'びゃ':'뱌','びゅ':'뷰','びょ':'뵤','ぴゃ':'퍄','ぴゅ':'퓨','ぴょ':'표',
   'てぃ':'티','でぃ':'디','ふぁ':'파','ふぃ':'피','ふぇ':'페','ふぉ':'포','しぇ':'셰','ちぇ':'체'
 };
-
 function toKatakana(text) {
   return [...text].map(ch => ch >= 'ぁ' && ch <= 'ゖ' ? String.fromCharCode(ch.charCodeAt(0) + 96) : ch).join('');
 }
-
 function toHiragana(text) {
   return [...text].map(ch => ch >= 'ァ' && ch <= 'ヶ' ? String.fromCharCode(ch.charCodeAt(0) - 96) : ch).join('');
 }
-
 function category(text) {
   const compact = text.replace(/[\s　]/g, '');
   if (!/^[\u3040-\u309f\u30a0-\u30ffー]+$/.test(compact)) return null;
@@ -38,7 +50,6 @@ function category(text) {
   if (/^[\u30a0-\u30ffー]+$/.test(compact)) return '가타카나';
   return '혼합';
 }
-
 function addFinal(text, jong) {
   if (!text) return text;
   const last = text.charCodeAt(text.length - 1) - 0xac00;
@@ -46,7 +57,6 @@ function addFinal(text, jong) {
     ? text.slice(0, -1) + String.fromCharCode(text.charCodeAt(text.length - 1) + jong)
     : text;
 }
-
 function koreanReading(text) {
   const hira = toHiragana(text).replace(/\s/g, '');
   let result = '';
@@ -73,10 +83,8 @@ function koreanReading(text) {
   }
   return result;
 }
-
 function wordPronunciation(word) {
   return typeof word.pronunciation === 'string' && word.pronunciation.trim()
     ? word.pronunciation.trim() : koreanReading(word.reading);
 }
-
-export { KANA_ROWS, toKatakana, category, koreanReading, wordPronunciation };
+export { KANA_ROWS, KANA_SETS, toKatakana, toHiragana, category, koreanReading, wordPronunciation };
