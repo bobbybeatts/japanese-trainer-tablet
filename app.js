@@ -51,5 +51,5 @@ async function initialize() {
   if (!standalone && /iPad|iPhone|Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1) $('#installButton').hidden = false;
 }
 
-if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+if ('serviceWorker' in navigator && !window.KanaNoteAndroid) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
 initialize().catch(error => { console.error(error); showToast('앱 저장소를 열지 못했습니다'); });

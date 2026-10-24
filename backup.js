@@ -5,10 +5,20 @@ import { $, showToast } from './ui.js';
 
 function exportData() {
   const payload = { app: 'kananote', version: 1, exportedAt: new Date().toISOString(), words: state.words, attempts: state.attempts };
-  const blob = new Blob([JSON.stringify(payload,null,2)], { type: 'application/json' });
+  const json = JSON.stringify(payload,null,2);
+  const filename = `kananote-backup-${new Date().toLocaleDateString('sv-SE')}.json`;
+  if (window.KanaNoteAndroid) {
+    window.KanaNoteAndroid.saveBackup(filename, json);
+    return;
+  }
+  const blob = new Blob([json], { type: 'application/json' });
   const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob); link.download = `kananote-backup-${new Date().toLocaleDateString('sv-SE')}.json`; link.click();
+  link.href = URL.createObjectURL(blob); link.download = filename; link.click();
   setTimeout(() => URL.revokeObjectURL(link.href), 1000); showToast('백업 파일을 만들었어요');
+}
+
+if (typeof window !== 'undefined') {
+  window.KanaNoteNativeSaveResult = saved => showToast(saved ? '백업 파일을 저장했어요' : '백업 저장을 취소했어요');
 }
 
 async function importData(event) {
