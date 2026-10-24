@@ -36,6 +36,11 @@ button { -webkit-tap-highlight-color: transparent; }
 .apk-promo-copy strong { font-size: 15px; }
 .apk-promo-copy small { color: rgba(255,255,255,.78); font-size: 12px; }
 .apk-promo-action { flex: none; padding: 10px 14px; border-radius: 12px; color: var(--green); background: white; font-size: 13px; font-weight: 800; }
+.apk-promo { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 20px 0 26px; padding: 16px 20px; border-radius: 18px; color: white; background: var(--green); text-decoration: none; box-shadow: 0 10px 28px rgba(23,63,53,.16); }
+.apk-promo-copy { display: flex; flex-direction: column; gap: 4px; }
+.apk-promo-copy strong { font-size: 15px; }
+.apk-promo-copy small { color: rgba(255,255,255,.78); font-size: 12px; }
+.apk-promo-action { flex: none; padding: 10px 14px; border-radius: 12px; color: var(--green); background: white; font-size: 13px; font-weight: 800; }
 
 main { padding-top: 34px; }
 .view { display: none; animation: rise .28s ease both; }
