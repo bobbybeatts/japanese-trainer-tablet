@@ -1,6 +1,6 @@
-import { KANA_SETS, toKatakana, toHiragana, koreanReading, wordPronunciation } from './kana.js?v=15';
+import { KANA_SETS, toKatakana, toHiragana, koreanReading, wordPronunciation } from './kana.js?v=16';
 import { state } from './state.js';
-import { createWritingSurface } from './writing.js?v=15';
+import { createWritingSurface } from './writing.js?v=16';
 import { $, $$ } from './ui.js';
 
 let chartMode = 'hiragana';
@@ -35,22 +35,15 @@ function renderWordExamples(char) {
   const matches = [];
   let cursor = 0;
   target.innerHTML = '<li class="kana-word-empty">단어를 불러오는 중…</li>';
-  const scheduleScan = callback => {
-    if (typeof requestIdleCallback === 'function') requestIdleCallback(callback, { timeout: 120 });
-    else if (typeof window !== 'undefined') setTimeout(() => callback(null), 0);
-    else callback(null);
-  };
-
-  const scan = deadline => {
-    const started = performance.now();
-    while (cursor < source.length && matches.length < 6 && (deadline && !deadline.didTimeout ? deadline.timeRemaining() > 2 : performance.now() - started < 7)) {
+  const scan = () => {
+    while (cursor < source.length && matches.length < 6) {
       const word = source[cursor++];
       const reading = toHiragana(word.reading || '');
       const expression = toHiragana(word.expression || '');
       if (reading.includes(normalized) || expression.includes(normalized)) matches.push(word);
     }
     if (cursor < source.length && matches.length < 6) {
-      scheduleScan(scan);
+      setTimeout(scan, 0);
       return;
     }
 
@@ -62,7 +55,7 @@ function renderWordExamples(char) {
     </li>`).join('') : '<li class="kana-word-empty">아직 이 글자가 포함된 단어가 없습니다.</li>';
   };
 
-  scheduleScan(scan);
+  setTimeout(scan, 0);
 }
 
 function openKanaDialog(char) {
@@ -75,7 +68,7 @@ function openKanaDialog(char) {
   const afterPaint = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : callback => callback();
   afterPaint(() => {
     if (!dialog.open) return;
-    modalWriting.setCharacter(char);
+    modalWriting.setCharacter(char, { redraw: false });
     modalWriting.resize();
     renderWordExamples(char);
   });
@@ -103,8 +96,10 @@ export function initChart() {
     charElement: $('#kanaDialogCharacter'),
     soundElement: $('#kanaDialogSound'),
     shouldShowGuide: () => true,
-    strokeWidth: () => 7
+    strokeWidth: () => 7,
+    observeResize: false
   });
+  globalThis.window?.addEventListener('resize', () => { if ($('#kanaDialog').open) modalWriting.resize(); });
   const dialog = $('#kanaDialog');
   dialog.addEventListener('close', () => document.documentElement?.classList.remove('kana-modal-open'));
   $('#closeKanaDialog').addEventListener('click', () => dialog.close());

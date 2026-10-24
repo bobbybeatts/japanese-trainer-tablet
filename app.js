@@ -1,8 +1,8 @@
 import { openDatabase, seedDatabase, fillMissingPronunciations } from './storage.js';
 import { refreshData } from './state.js';
 import { initStudy, resetQuiz } from './study.js';
-import { initChart } from './chart.js?v=15';
-import { initWriting, resizeCanvas } from './writing.js?v=15';
+import { initChart } from './chart.js?v=16';
+import { initWriting, resizeCanvas } from './writing.js?v=16';
 import { initWords, renderWordList } from './words.js';
 import { initBackup } from './backup.js';
 import { $, $$, showToast } from './ui.js';
