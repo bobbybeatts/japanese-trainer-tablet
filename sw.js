@@ -1,6 +1,6 @@
-const CACHE = 'kananote-v16';
+const CACHE = 'kananote-v17';
 const ASSETS = [
-  './', './index.html', './styles.css', './styles.css?v=10', './base.css', './base.css?v=2', './study.css', './chart.css',
+  './', './index.html', './styles.css', './styles.css?v=11', './base.css', './base.css?v=2', './study.css', './chart.css',
   './writing.css', './writing.css?v=3', './words.css', './words.css?v=7', './navigation.css', './responsive.css', './responsive.css?v=2',
   './manifest.webmanifest', './manifest.webmanifest?v=10',
   './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png',
