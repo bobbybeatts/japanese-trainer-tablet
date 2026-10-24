@@ -77,14 +77,20 @@
 
       <section id="chartView" class="view" data-view="chart">
         <div class="section-heading compact">
-          <div><p class="eyebrow">기본 46자</p><h1>가나 한눈표</h1></div>
+          <div><p id="kanaSetLabel" class="eyebrow">기본 46자</p><h1>가나 한눈표</h1></div>
         </div>
-        <div class="segmented" role="group" aria-label="가나표 문자 선택">
+        <div id="scriptSegmented" class="segmented" role="group" aria-label="가나 문자 종류">
           <button class="active" data-chart="hiragana" type="button">히라가나</button>
           <button data-chart="katakana" type="button">가타카나</button>
         </div>
+        <div id="kanaSetSegmented" class="segmented kana-set-segmented" role="group" aria-label="가나표 발음 종류">
+          <button class="active" data-kana-set="basic" type="button">기본</button>
+          <button data-kana-set="dakuten" type="button">탁음</button>
+          <button data-kana-set="handakuten" type="button">반탁음</button>
+          <button data-kana-set="yoon" type="button">요음</button>
+        </div>
         <div id="kanaChart" class="kana-chart" aria-label="가나 문자표"></div>
-        <p class="helper-text">한국어 음은 처음 익힐 때 참고하는 근사 표기입니다.</p>
+        <p class="helper-text">글자를 누르면 따라쓰기와 예시 단어를 볼 수 있습니다. 한국어 음은 참고용 근사 표기입니다.</p>
       </section>
 
       <section id="writingView" class="view" data-view="writing">
@@ -145,6 +151,19 @@
       <button data-target="words" type="button"><span>単</span>내 단어</button>
     </nav>
   </div>
+  <dialog id="kanaDialog" class="kana-dialog" aria-labelledby="kanaDialogHeading">
+    <div class="kana-dialog-header">
+      <div><p class="eyebrow">글자 따라쓰기</p><h2 id="kanaDialogHeading"><span id="kanaDialogCharacter">あ</span><span id="kanaDialogSound">아</span></h2></div>
+      <button id="closeKanaDialog" class="secondary-button kana-dialog-close" type="button" aria-label="팝업 닫기">닫기</button>
+    </div>
+    <div class="kana-dialog-body">
+      <section class="kana-dialog-practice" aria-label="따라쓰기 영역">
+        <div class="kana-dialog-actions"><button id="clearKanaDialog" class="secondary-button" type="button">모두 지우기</button><button id="undoKanaDialog" class="secondary-button" type="button">한 획 되돌리기</button></div>
+        <div class="kana-dialog-canvas"><canvas id="kanaDialogCanvas"></canvas></div>
+      </section>
+      <section class="kana-dialog-words" aria-labelledby="kanaDialogWordsHeading"><h3 id="kanaDialogWordsHeading">이 글자가 들어간 단어</h3><ul id="kanaWordExamples" class="kana-word-examples"></ul></section>
+    </div>
+  </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="app.js" type="module"></script>
 </body>
