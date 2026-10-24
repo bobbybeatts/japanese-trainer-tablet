@@ -5,6 +5,10 @@
   .apk-button { margin-left: auto; padding: 0 12px; }
   .apk-label-full { display: none; }
   .apk-label-short { display: inline; }
+  .apk-promo { gap: 10px; margin: 16px 0 22px; padding: 14px; }
+  .apk-promo-copy strong { font-size: 14px; }
+  .apk-promo-copy small { font-size: 11px; }
+  .apk-promo-action { padding: 10px; font-size: 12px; }
   main { padding-top: 24px; }
   .section-heading { align-items: center; }
   .quiz-card { min-height: 410px; padding: 18px; }
