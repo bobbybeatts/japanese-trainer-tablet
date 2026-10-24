@@ -30,16 +30,39 @@ select:focus, input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rg
 .action-row button { flex: 1; }
 
 .segmented { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: min(420px,100%); padding: 5px; margin-bottom: 18px; border-radius: 15px; background: #e9e4da; }
+.kana-set-segmented { grid-template-columns: repeat(4,1fr); width: min(620px,100%); margin-top: -8px; }
 .segmented button { min-height: 42px; border: 0; border-radius: 11px; color: var(--muted); background: transparent; font-weight: 800; }
 .segmented button.active { color: var(--ink); background: white; box-shadow: 0 3px 12px rgba(0,0,0,.08); }
 .kana-chart { display: grid; grid-template-columns: .7fr repeat(5,1fr); overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--card); }
 .kana-cell { min-height: 66px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .kana-cell:nth-child(6n) { border-right: 0; }
 .kana-cell.header { min-height: 38px; color: var(--muted); font-size: 12px; font-weight: 800; background: #f0ece3; }
+.kana-button { padding: 3px; border: 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: inherit; background: var(--card); font: inherit; cursor: pointer; }
+.kana-button:hover, .kana-button:focus-visible { background: var(--green-soft); outline: 2px solid var(--green); outline-offset: -2px; }
 .kana-cell .char { font: 700 clamp(22px,4vw,32px)/1.1 "Hiragino Kaku Gothic ProN", sans-serif; }
 .kana-cell .sound { margin-top: 3px; color: var(--muted); font-size: 11px; }
 .kana-cell.empty { color: #c8c1b5; }
 .helper-text { color: var(--muted); font-size: 12px; }
+
+.kana-dialog { width: min(900px, calc(100vw - 28px)); max-width: 900px; max-height: min(88dvh, 820px); margin: auto; padding: 0; overflow: auto; border: 0; border-radius: 24px; color: var(--ink); background: var(--paper); box-shadow: var(--shadow); }
+.kana-dialog::backdrop { background: rgba(13,27,23,.58); backdrop-filter: blur(3px); }
+.kana-dialog-header { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; border-bottom: 1px solid var(--line); background: var(--paper); }
+.kana-dialog-header .eyebrow { margin-bottom: 2px; }
+.kana-dialog-header h2 { display: flex; align-items: baseline; gap: 12px; font-size: 30px; }
+.kana-dialog-header h2 span:first-child { font: 700 42px/1 "Hiragino Kaku Gothic ProN", sans-serif; }
+.kana-dialog-header h2 span:last-child { color: var(--muted); font-size: 16px; }
+.kana-dialog-close { min-height: 42px; }
+.kana-dialog-body { display: grid; grid-template-columns: minmax(0,1.08fr) minmax(240px,.92fr); gap: 20px; padding: 18px 22px 24px; }
+.kana-dialog-actions { display: flex; gap: 8px; margin-bottom: 10px; }
+.kana-dialog-actions button { min-height: 40px; padding: 0 12px; font-size: 12px; }
+.kana-dialog-canvas { height: min(42dvh, 380px); min-height: 250px; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: #fffefa; }
+.kana-dialog-canvas canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.kana-dialog-words h3 { margin: 0 0 12px; font-size: 16px; }
+.kana-word-examples { display: grid; gap: 8px; max-height: min(45dvh, 400px); overflow: auto; margin: 0; padding: 0; list-style: none; }
+.kana-word-example, .kana-word-empty { display: grid; gap: 3px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+.kana-word-example strong { font-size: 18px; }
+.kana-word-reading { color: var(--green); font-size: 12px; font-weight: 700; }
+.kana-word-meaning, .kana-word-empty { color: var(--muted); font-size: 13px; }
 
 .writing-header { align-items: center; margin-bottom: 18px; }
 .writing-prompt { display: flex; align-items: center; gap: 14px; padding: 8px 16px; border-radius: 18px; background: var(--green-soft); }
