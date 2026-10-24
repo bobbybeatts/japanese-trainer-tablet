@@ -16,13 +16,13 @@ function renderKanaChart() {
   const headers = ['', 'a', 'i', 'u', 'e', 'o'];
   const { rows, label } = KANA_SETS[chartSet];
   $('#kanaSetLabel').textContent = label;
-  chart.innerHTML = headers.map(text => `div class="kana-cell header">${text}</div>`).join('');
+  chart.innerHTML = headers.map(text => `<div class="kana-cell header">${text}</div>`).join('');
   for (const [rowName, chars] of rows) {
-    chart.insertAdjacentHTML('beforeend', `div class="kana-cell header">${rowName}</div>`);
+    chart.insertAdjacentHTML('beforeend', `<div class="kana-cell header">${rowName}</div>`);
     for (const hira of chars) {
       const char = hira && chartMode === 'katakana' ? toKatakana(hira) : hira;
       chart.insertAdjacentHTML('beforeend', char
-        ? `button class="kana-cell kana-button" type="button" data-kana="${char}" aria-label="${char}, ${koreanReading(char)}. 눌러서 따라쓰기"><span class="char">${char}</span><span class="sound">${koreanReading(char)}</span></button>`
+        ? `<button class="kana-cell kana-button" type="button" data-kana="${char}" aria-label="${char}, ${koreanReading(char)}. 눌러서 따라쓰기"><span class="char">${char}</span><span class="sound">${koreanReading(char)}</span></button>`
         : '<div class="kana-cell empty">·</div>');
     }
   }
@@ -36,7 +36,7 @@ function renderWordExamples(char) {
     const expression = toHiragana(word.expression || '');
     return reading.includes(normalized) || expression.includes(normalized);
   }).slice(0, 8);
-  target.innerHTML = words.length ? words.map(word => `li class="kana-word-example"><strong>${escapeHtml(word.expression)}</strong><span class="kana-word-reading">${escapeHtml(word.reading)} · ${escapeHtml(wordPronunciation(word))}</span><span class="kana-word-meaning">${escapeHtml(word.meaning)}</span></li>`).join('')
+  target.innerHTML = words.length ? words.map(word => `<li class="kana-word-example"><strong>${escapeHtml(word.expression)}</strong><span class="kana-word-reading">${escapeHtml(word.reading)} · ${escapeHtml(wordPronunciation(word))}</span><span class="kana-word-meaning">${escapeHtml(word.meaning)}</span></li>`).join('')
     : '<li class="kana-word-empty">아직 이 글자가 포함된 단어가 없습니다.</li>';
 }
 
