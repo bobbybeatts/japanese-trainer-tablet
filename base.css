@@ -29,6 +29,8 @@ button { -webkit-tap-highlight-color: transparent; }
 .status-badge { margin-left: auto; padding: 7px 11px; border-radius: 999px; color: var(--green); background: var(--green-soft); font-size: 12px; font-weight: 700; }
 .install-button { margin-left: auto; }
 .install-button + .status-badge { margin-left: 0; }
+.apk-button { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; white-space: nowrap; }
+.apk-label-short { display: none; }
 
 main { padding-top: 34px; }
 .view { display: none; animation: rise .28s ease both; }
