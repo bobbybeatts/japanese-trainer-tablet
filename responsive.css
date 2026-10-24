@@ -20,6 +20,11 @@
   .writing-header { align-items: flex-start; }
   .writing-prompt strong { font-size: 40px; }
   .check-label { margin-left: 0; }
+  .kana-dialog { width: calc(100vw - 20px); max-height: 92dvh; border-radius: 18px; }
+  .kana-dialog-header { padding: 14px 16px; }
+  .kana-dialog-body { grid-template-columns: 1fr; gap: 18px; padding: 14px 16px 18px; }
+  .kana-dialog-canvas { height: min(32dvh, 270px); min-height: 190px; }
+  .kana-word-examples { max-height: 24dvh; }
 }
 
 @media (max-width: 470px) {
