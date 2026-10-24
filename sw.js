@@ -1,6 +1,6 @@
-const CACHE = 'kananote-v9';
+const CACHE = 'kananote-v10';
 const ASSETS = [
-  './', './index.html', './styles.css', './styles.css?v=7', './base.css', './study.css', './chart.css',
+  './', './index.html', './styles.css', './styles.css?v=8', './base.css', './study.css', './chart.css',
   './writing.css', './words.css', './words.css?v=7', './navigation.css', './responsive.css',
   './manifest.webmanifest', './manifest.webmanifest?v=9',
   './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png',
@@ -24,4 +24,3 @@ self.addEventListener('fetch', event => {
     return response;
   }).catch(() => caches.match('./index.html'))));
 });
-
