@@ -2,6 +2,9 @@
   .app-shell { padding-left: 16px; padding-right: 16px; }
   .topbar { height: 76px; }
   .status-badge { display: none; }
+  .apk-button { margin-left: auto; padding: 0 12px; }
+  .apk-label-full { display: none; }
+  .apk-label-short { display: inline; }
   main { padding-top: 24px; }
   .section-heading { align-items: center; }
   .quiz-card { min-height: 410px; padding: 18px; }
