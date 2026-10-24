@@ -1,6 +1,6 @@
-import { KANA_SETS, toKatakana, toHiragana, koreanReading, wordPronunciation } from './kana.js';
+import { KANA_SETS, toKatakana, toHiragana, koreanReading, wordPronunciation } from './kana.js?v=14';
 import { state } from './state.js';
-import { createWritingSurface } from './writing.js';
+import { createWritingSurface } from './writing.js?v=14';
 import { $, $$ } from './ui.js';
 
 let chartMode = 'hiragana';
